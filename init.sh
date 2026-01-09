@@ -24,7 +24,6 @@ source ./partials/fail2ban.sh
 
 init() {
   check_envs
-  validate_envs
 
   if [[ "$OS_AUTO_UPDATE_ENABLE" == true ]]; then
     configure_os_updates
