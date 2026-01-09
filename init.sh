@@ -102,12 +102,6 @@ check_envs () {
   require_env FAIL2BAN_ENABLE
 }
 
-validate_envs() {
-  info "Validating environment variables..."
-  ssh_validate_port "$SSH_PORT"
-  ssh_validate_user "$SSH_USER"
-}
-
 # 
 # Configure OS
 # 
@@ -228,6 +222,10 @@ configure_ssh() {
   info "Validating SSH environment variables..."
   require_env SSH_PORT
   require_env SSH_USER
+
+  info "Validating environment variables..."
+  ssh_validate_port "$SSH_PORT"
+  ssh_validate_user "$SSH_USER"
   
   ssh_configure
 }
