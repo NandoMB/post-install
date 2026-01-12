@@ -195,8 +195,8 @@ install_apps() {
   if [[ "$APP_INSTALL_GIT" == true ]]; then
     os_install_apps_git
   fi
-  if [[ "$APP_INSTALL_NEOFETCH" == true ]]; then
-    os_install_apps_neofetch
+  if [[ "$APP_INSTALL_FASTFETCH" == true ]]; then
+    os_install_apps_fastfetch
   fi
   if [[ "$APP_INSTALL_NVM" == true ]]; then
     os_install_apps_nvm

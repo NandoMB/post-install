@@ -10,15 +10,15 @@ os_install_apps_git() {
   sudo apt install -y git
 }
 
-os_install_apps_neofetch() {
-  info "Instalando NeoFetch..."
-  sudo apt install -y neofetch
+os_install_apps_fastfetch() {
+  info "Instalando FastFetch..."
+  sudo apt install -y fastfetch
 }
 
 os_install_apps_nvm() {
   info "Instalando NVM..."
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-  export NVM_DIR="$USER_HOME/.nvm"
+  export NVM_DIR="$ACTIVE_USER_HOME/.nvm"
   source "$NVM_DIR/nvm.sh"
   nvm install --lts --default
 }
@@ -26,7 +26,7 @@ os_install_apps_nvm() {
 os_install_apps_pm2() {
   info "Instalando PM2..."
   npm install pm2@latest -g
-  # pm2 startup
+  pm2 startup
 }
 
 os_install_apps_docker() {
