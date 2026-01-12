@@ -71,14 +71,18 @@ vpn_configure_create_config_file() {
 
 vpn_configure_enable_ip_forwarding() {
   info "Ativando o encaminhamento de IP..."
-  sudo sed -i 's|^#\?net.ipv4.ip_forward=.*|net.ipv4.ip_forward=1|' /etc/sysctl.conf
 
-  if ! grep -q "^net.ipv4.ip_forward=1" /etc/sysctl.conf; then
-    echo "net.ipv4.ip_forward=1" | sudo tee -a /etc/sysctl.conf
-  fi
+  local sysctl_file="/etc/sysctl.d/99-ip-forward.conf"
+  echo "net.ipv4.ip_forward=1" | sudo tee "$sysctl_file" >/dev/null
+  sudo chmod 644 "$sysctl_file"
+  sudo sysctl --system
 
-  sudo sysctl -w net.ipv4.ip_forward=1
-  sudo sysctl -p
+  # sudo sed -i 's|^#\?net.ipv4.ip_forward=.*|net.ipv4.ip_forward=1|' /etc/sysctl.conf
+  # if ! grep -q "^net.ipv4.ip_forward=1" /etc/sysctl.conf; then
+  #   echo "net.ipv4.ip_forward=1" | sudo tee -a /etc/sysctl.conf
+  # fi
+  # sudo sysctl -w net.ipv4.ip_forward=1
+  # sudo sysctl -p
 }
 
 #
@@ -193,7 +197,7 @@ vpn_create_user_apply_changes() {
 vpn_create_user_print_client_config() {
   info "Configuração do cliente:"
   echo "-----------------------------------"
-  sudo cat "$VPN_CLIENT_CONFIG_FILE"
+  sudo cat "$VPN_CLIENT_CONFIG_PATH"
   echo "-----------------------------------"
   info "Configuração do server:"
   echo "-----------------------------------"
