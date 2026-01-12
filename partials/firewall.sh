@@ -16,6 +16,11 @@ firewall_apply_rules() {
   local template="./templates/firewall_rules.tpl"
   local temp_file=$(mktemp)
 
+  echo "VPN_CONFIGURE_PORT: $VPN_CONFIGURE_PORT"
+  echo "VPN_CONFIGURE_INTERFACE: $VPN_CONFIGURE_INTERFACE"
+  echo "VPN_CONFIGURE_SERVER_NETWORK: $VPN_CONFIGURE_SERVER_NETWORK"
+  echo "SSH_PORT: $SSH_PORT"
+
   sed \
     -e "s|{{WG_PORT}}|$VPN_CONFIGURE_PORT|g" \
     -e "s|{{WG_INTERFACE}}|$VPN_CONFIGURE_INTERFACE|g" \
