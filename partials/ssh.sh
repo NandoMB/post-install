@@ -94,10 +94,15 @@ ssh_create_user_generate_keys() {
   success "Chave SSH gerada: $SSH_KEY_PATH"
   echo
   echo "🔑 Chave pública:"
-  cat "$SSH_KEY_PATH.pub"
+  echo "Incluída em $SSH_AUTHORIZED_FILE"
   echo
   echo "🔐 Chave privada (guarde com segurança!):"
   cat "$SSH_KEY_PATH"
+  echo
+  info "Envie a chave privada ao usuário $SSH_CREATE_USER_EMAIL."
+  info "Excluindo a chave privada do sistema por segurança."
+  rm -f "$SSH_KEY_PATH"
+  success "Chave privada excluída do sistema."
 }
 
 ssh_create_user_authorize_keys() {
