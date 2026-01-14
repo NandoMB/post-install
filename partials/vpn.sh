@@ -19,7 +19,7 @@ vpn_configure() {
   info "Configurando VPN..."
   
   info "Instalando WireGuard..."
-  sudo apt update && sudo apt install -y wireguard
+  sudo apt install -y wireguard
 
   vpn_configure_generate_keys
 
@@ -72,10 +72,10 @@ vpn_configure_create_config_file() {
 vpn_configure_enable_ip_forwarding() {
   info "Ativando o encaminhamento de IP..."
 
-  local sysctl_file="/etc/sysctl.d/99-ip-forward.conf"
-  echo "net.ipv4.ip_forward=1" | sudo tee "$sysctl_file" >/dev/null
-  sudo chmod 644 "$sysctl_file"
-  sudo sysctl --system
+  # local sysctl_file="/etc/sysctl.d/99-ip-forward.conf"
+  # echo "net.ipv4.ip_forward=1" | sudo tee "$sysctl_file" >/dev/null
+  # sudo chmod 644 "$sysctl_file"
+  # sudo sysctl --system
 
   # sudo sed -i 's|^#\?net.ipv4.ip_forward=.*|net.ipv4.ip_forward=1|' /etc/sysctl.conf
   # if ! grep -q "^net.ipv4.ip_forward=1" /etc/sysctl.conf; then
